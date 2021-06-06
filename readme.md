@@ -5,10 +5,10 @@
 
 A vital piece of any fuzzer is the monitoring/logging, during fuzzing we use it to monitor the behavior of target program and detect interesting behaviors corresponding to the current input data.
 
-The `VmwpMonitor` is a DLL that you must inject it to the `vmwp.exe` process to monitor the `IO` operations on the Emulated Devices between the Guest Vms and the vm worker process, there are number of emulated devices
+The `VmwpMonitor` is a DLL that you must inject it to the `vmwp.exe` process to monitor the `IO` operations on the Emulated Devices between the Guest VM and the VM worker process, there are number of emulated devices
 on the Hyper-V that are using on the `Generation 1` VMs, the following table consist of Modules that contain/provide the emulated devices.
 
-For more information about vmwp (VM Worker Process) and emulated devices refer to these links:
+For more information about vmwp (VM Worker Process) and emulated devices check out these links:
 
 - [Attacking the VM Worker Process](https://msrc-blog.microsoft.com/2019/09/11/attacking-the-vm-worker-process/)
 - [Hyntrospect: a fuzzer for Hyper-V devices](https://www.sstic.org/2021/presentation/hyntrospect_a_fuzzer_for_hyper-v_devices/)
@@ -33,7 +33,7 @@ For more information about vmwp (VM Worker Process) and emulated devices refer t
 
 ---
 
-As you know the `vmwp` implemented in C++, so for hooking you have to deal with class members! not really :-), you only need the `Prototype` of target function and it's relative offset is the module.
+As you know the `vmwp` implemented in C++, so for hooking you have to deal with class members! not really :-), you only need the `Prototype` of target function and its relative offset in the module.
 
 ```bat
 #:.
@@ -90,7 +90,7 @@ As you know the `vmwp` implemented in C++, so for hooking you have to deal with 
 ```
 
 
-In the source tree for every device supported by the `VmEmulatedDevices.dll` there is a corresponding pare of files (header and source) with the same name, and in the files there is a function called `Init` + DeviceName + `Hooks` (e.x, for `PciBusDevice` it's `InitPciBusDeviceHooks`).
+In the source tree for every device supported by the `VmEmulatedDevices.dll` there is a corresponding paire of files (header and source) with the same name, and in the files there is a function called `Init` + DeviceName + `Hooks` (E.g, for `PciBusDevice` it's `InitPciBusDeviceHooks`).
 
 This function has two variables that must fill with the **RVA offset** of target functions in desire DLL module, you can achieve these offsets by Static analysis or Dynamically by a Debugger. It's just a simple operation `FunctionAddress` - `BaseAddress`.
 
