@@ -285,7 +285,7 @@ Here is a screenshot from the output when using `Scan for hardware changes` in D
 
 # Compile & Usage
 
-The only dependency of project is the Microsoft Detours, which simply could be installed via VCPKG
+The only dependency of project is the [Microsoft Detours](https://github.com/microsoft/Detours), which simply could be installed via VCPKG
 
 ```bat
 vcpkg install detours:x64-windows detours:x86-windows
